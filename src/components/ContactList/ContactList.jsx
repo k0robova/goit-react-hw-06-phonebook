@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import css from './ContactList.module.css';
 // import { Form } from 'components/Form/Form';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import ContactElement from 'components/ContactElement/ContactElement';
 
 export const ContactList = () => {
