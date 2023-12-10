@@ -1,28 +1,47 @@
 import React from 'react';
 import { useState } from 'react';
 import css from './Form.module.css';
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
 
-export function Form({ onSubmitForm }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export function Form() {
+  const [value, setValue] = useState({
+    name: '',
+    number: '',
+  });
 
-  const handleNameChange = evt => {
-    setName(evt.target.value);
-  };
-
-  const handleNumberChange = evt => {
-    setNumber(evt.target.value);
-  };
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
 
   const handleFormSubmit = evt => {
     evt.preventDefault();
-    onSubmitForm({ name, number });
     resetForm();
+    if (
+      contacts.some(
+        contact => contact.name.toLowerCase() === value.name.toLowerCase()
+      )
+    ) {
+      alert(`${value.name} is already in contactcs!`);
+      return;
+    }
+
+    const newContact = {
+      ...value,
+      id: nanoid(),
+    };
+
+    dispatch({ type: 'addContact', payload: newContact });
   };
 
   const resetForm = () => {
-    setName('');
-    setNumber('');
+    setValue({
+      name: '',
+      number: '',
+    });
+  };
+
+  const handleChange = ({ target: { name, value } }) => {
+    setValue(prev => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -32,8 +51,8 @@ export function Form({ onSubmitForm }) {
         <input
           type="text"
           name="name"
-          value={name}
-          onChange={handleNameChange}
+          value={value.name}
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -42,8 +61,8 @@ export function Form({ onSubmitForm }) {
           type="tel"
           name="number"
           required
-          value={number}
-          onChange={handleNumberChange}
+          value={value.number}
+          onChange={handleChange}
         />
       </label>
       <button type="submit" className={css.btn_submit}>

@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-/* .btn_delete {
+.btn_delete {
   background-color: rgb(93, 80, 80);
   color: white;
   padding: 5px;
@@ -19,4 +19,4 @@
 }
 .btn_delete:hover {
   background-color: rgb(205, 43, 43);
-} */
+}
