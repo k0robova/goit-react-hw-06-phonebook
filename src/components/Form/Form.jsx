@@ -3,6 +3,7 @@ import { useState } from 'react';
 import css from './Form.module.css';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
+import { addContact, getContacts } from '../../redux/contactsSlice';
 
 export function Form() {
   const [value, setValue] = useState({
@@ -11,7 +12,7 @@ export function Form() {
   });
 
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(getContacts);
 
   const handleFormSubmit = evt => {
     evt.preventDefault();
@@ -30,7 +31,7 @@ export function Form() {
       id: nanoid(),
     };
 
-    dispatch({ type: 'addContact', payload: newContact });
+    dispatch(addContact(newContact));
   };
 
   const resetForm = () => {

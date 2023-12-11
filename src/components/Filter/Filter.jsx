@@ -1,13 +1,13 @@
 import React from 'react';
 import css from './Filter.module.css';
 import { useDispatch } from 'react-redux';
+import { filter } from '../../redux/filterSlice';
 
 export const Filter = () => {
-  // const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
   const onFilterValueChange = evt => {
-    dispatch({ type: 'filter', payload: evt.target.value });
+    dispatch(filter(evt.target.value));
   };
 
   return (
@@ -16,7 +16,6 @@ export const Filter = () => {
       <input
         type="text"
         name="contact_name"
-        // value={onFilterValueChange()}
         placeholder="Search..."
         onChange={onFilterValueChange}
         className={css.input_find}
