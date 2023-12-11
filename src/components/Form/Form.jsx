@@ -27,8 +27,8 @@ export function Form() {
     }
 
     const newContact = {
-      ...value,
       id: nanoid(),
+      ...value,
     };
 
     dispatch(addContact(newContact));

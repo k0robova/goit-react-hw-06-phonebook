@@ -10,8 +10,6 @@ import { getContacts } from '../redux/contactsSlice';
 export function App() {
   const contacts = useSelector(getContacts);
 
-  console.log(contacts);
-
   return (
     <div>
       <h1 className={css.main_title}>Phonebook</h1>
